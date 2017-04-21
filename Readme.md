@@ -6,13 +6,18 @@ Great for streaming libs that return emitters as a callback.
 ## Syntax
 
 ```
-canStreamX(streamConstructor, emitterMethod, subscribe, unsubscribe);
+canStreamX([options]);
 ```
 
 ### Notes
  - Passing falsey values for the emitter flag makes indicates the emitter is a function and should be called directly.
  - Passing falsey values for the unsubscribe method indicates the unsubscribe method is derived from the subscribe method.
 
+### Options
+ - streamConstructor - <Function> method necessary to create a stream.
+ - emitMethod - <string> Which method to use as the emitter.
+ - on - <string> Which method to use to subscribe.
+ - off - <string> Which method to use to unsubscribe.
 
 ## Example Usage
 
@@ -22,7 +27,13 @@ canStreamX(streamConstructor, emitterMethod, subscribe, unsubscribe);
 var canStreamX = require('./can-stream-x');
 var Rx = require('rxjs');
 var Observable = Rx.Observable;
-var canStream = canStreamX(Observable.create, 'next', 'subscribe', 'unsubscribe');
+
+var canStream = canStreamX({
+	streamConstructor: Observable.create,
+    emitMethod: 'next',
+    on: 'subscribe',
+    off: 'unsubscribe'
+});
 
 var c = compute(0);
 
@@ -44,7 +55,12 @@ console.log(computeVal); //1
 ```
 var canStreamX = require('./can-stream-x');
 var Kefir = require('kefir');
-var canStream = canStreamX(Kefir.stream, 'emit', 'onValue', 'offValue');
+var canStream = canStreamX({
+  streamConstructor: Kefir.stream,
+  emitMethod: 'emit',
+  on: 'onValue',
+  off: 'offValue'
+});
 ...
 ```
 
@@ -53,7 +69,11 @@ var canStream = canStreamX(Kefir.stream, 'emit', 'onValue', 'offValue');
 ```
 var canStreamX = require('./can-stream-x');
 var Bacon = require('bacon');
-var canStream = canStreamX(Bacon.fromBinder, false, 'onValue', false);
+var canStream = canStreamX({
+  streamConstructor: Bacon.fromBinder,
+  on: 'onValue',
+  off: false
+});
 ...
 ```
 
