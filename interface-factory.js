@@ -6,12 +6,27 @@ function makeEmitter(emitter) {
   } : emitter;
 }
 
-module.exports = function(factory, emitMethod, on, off) {
-  emitMethod = emitMethod || 'emit';
+var config = {
+  streamConstructor: function(){},
+  async: true,
+  emitMethod: 'emit',
+  on: '',
+  off: ''
+};
+
+module.exports = function(options) {
+  options = Object.assign({}, config, options);
+
+  var streamConstructor = options.streamConstructor,
+    emitMethod = options.emitMethod,
+    _async = options.async,
+    on = options.on,
+    off = options.off;
 
   return Object.assign({}, {
     toStream: function(compute) {
-      return factory(function(_emitter) {
+
+      return streamConstructor(function(_emitter) {
         var emitter = makeEmitter(_emitter);
         var handle = function onComputeChange(ev, value) {
            emitter[emitMethod](value)
@@ -36,7 +51,7 @@ module.exports = function(factory, emitMethod, on, off) {
         lastSetValue,
         emitter,
         unsubscribe,
-        setterStream = factory(function(_emitter) {
+        setterStream = streamConstructor(function(_emitter) {
           emitter = makeEmitter(_emitter);
           if( lastSetValue !== undefined) {
             emitter[emitMethod](lastSetValue);
