@@ -44,6 +44,7 @@ console.log(computeVal); //1
 ```
 var canStreamX = require('./can-stream-x');
 var Kefir = require('kefir');
+var canStream = canStreamX(Kefir.stream, 'emit', 'onValue', 'offValue');
 ...
 ```
 
@@ -52,6 +53,7 @@ var Kefir = require('kefir');
 ```
 var canStreamX = require('./can-stream-x');
 var Bacon = require('bacon');
+var canStream = canStreamX(Bacon.fromBinder, false, 'onValue', false);
 ...
 ```
 
