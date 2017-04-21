@@ -22,7 +22,21 @@ canStreamX(streamConstructor, emitterMethod, subscribe, unsubscribe);
 var canStreamX = require('./can-stream-x');
 var Rx = require('rxjs');
 var Observable = Rx.Observable;
-module.exports = canStreamX(Observable.create, 'next', 'subscribe', 'unsubscribe');
+var canStream = canStreamX(Observable.create, 'next', 'subscribe', 'unsubscribe');
+
+var c = compute(0);
+
+var stream = canStream.toStream(c);
+
+var computeVal;
+
+stream.subscribe((newVal) => {
+	computeVal = newVal;
+});
+
+c(1);
+
+console.log(computeVal); //1
 ```
 
 ### Using Kefir
@@ -30,7 +44,7 @@ module.exports = canStreamX(Observable.create, 'next', 'subscribe', 'unsubscribe
 ```
 var canStreamX = require('./can-stream-x');
 var Kefir = require('kefir');
-module.exports = canStreamX(Kefir.stream, 'emit', 'onValue', 'offValue');
+...
 ```
 
 ### Using Bacon
@@ -38,7 +52,7 @@ module.exports = canStreamX(Kefir.stream, 'emit', 'onValue', 'offValue');
 ```
 var canStreamX = require('./can-stream-x');
 var Bacon = require('bacon');
-module.exports = canStreamX(Bacon.fromBinder, false, 'onValue', false);
+...
 ```
 
 ## testing
