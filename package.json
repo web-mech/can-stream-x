@@ -11,10 +11,19 @@
     "canjs",
     "canjs-plugin",
     "can-stream",
-    "can-stream-rjx",
-    "rjx"
+    "can-stream-x",
+    "frp",
+    "stream"
   ],
   "author": "Michael Price <webmech@gmail.com>",
+  "bugs": {
+    "url": "https://github.com/web-mech/can-stream-x/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/web-mech/can-stream-x.git"
+  },
+  "homepage": "https://github.com/web-mech/can-stream-x",
   "license": "MIT",
   "dependencies": {
     "can-compute": "^3.0.0",
