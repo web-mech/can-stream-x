@@ -14,8 +14,7 @@ const canStream = canStreamX({
   off: false
 });
 
-/** import DefineList from 'can-define/list/list'; **/
-test('Compute changes can be streamed', async (t) => {
+test('Compute changes can be streamed', (t) => {
   const c = compute(0);
 
   const stream = canStream.toStream(c);
