@@ -4,7 +4,8 @@
   "description": "Stream values into and out of computes",
   "main": "can-stream-x",
   "scripts": {
-    "test": "ava *.test.js"
+    "test": "ava *.test.js",
+    "release": "npm test && standard-version"
   },
   "keywords": [
     "canjs",
