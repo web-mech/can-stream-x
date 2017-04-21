@@ -8,7 +8,12 @@ import DefineList from 'can-define/list/list';
 
 import { Observable } from 'rxjs';
 
-const canStream = canStreamX(Observable.create, 'next', 'subscribe', 'unsubscribe');
+const canStream = canStreamX({
+    streamConstructor: Observable.create,
+    emitMethod: 'next',
+    on: 'subscribe',
+    off: 'unsubscribe'
+  });
 
 test('Compute changes can be streamed', (t) => {
   const c = compute(0);

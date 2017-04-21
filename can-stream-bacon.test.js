@@ -8,7 +8,11 @@ import DefineList from 'can-define/list/list';
 
 import Bacon from 'baconjs';
 
-const canStream = canStreamX(Bacon.fromBinder, false, 'onValue', false);
+const canStream = canStreamX({
+  streamConstructor: Bacon.fromBinder,
+  on: 'onValue',
+  off: false
+});
 
 /** import DefineList from 'can-define/list/list'; **/
 test('Compute changes can be streamed', async (t) => {

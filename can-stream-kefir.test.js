@@ -1,3 +1,4 @@
+
 import test from 'ava';
 
 import compute from 'can-compute';
@@ -8,7 +9,12 @@ import DefineList from 'can-define/list/list';
 
 import Kefir from 'kefir';
 
-const canStream = canStreamX(Kefir.stream, 'emit', 'onValue', 'offValue');
+const canStream = canStreamX({
+  streamConstructor: Kefir.stream,
+  emitMethod: 'emit',
+  on: 'onValue',
+  off: 'offValue'
+});
 
 /** import DefineList from 'can-define/list/list'; **/
 test('Compute changes can be streamed', async (t) => {
