@@ -1,6 +1,6 @@
 {
   "name": "can-stream-x",
-  "version": "0.2.2",
+  "version": "1.0.0",
   "description": "Stream values into and out of computes",
   "main": "can-stream-x",
   "scripts": {
