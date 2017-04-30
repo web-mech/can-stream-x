@@ -169,3 +169,17 @@ test('Stream on DefineList', (t) => {
 
   people.pop();
 });
+
+test('Test if streams are memory safe', function(t) {
+  const c = canStream.toCompute(setStream => setStream);
+  const handler = (ev, newVal, oldVal) => {
+    console.log('newVal', newVal); //->output: obaid
+  };
+  c.on('change', handler);
+
+  t.is(c.computeInstance.__bindEvents._lifecycleBindings, 1);
+
+  c.off('change', handler);
+
+  t.is(c.computeInstance.__bindEvents._lifecycleBindings, 0);
+});
