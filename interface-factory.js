@@ -6,6 +6,17 @@ function makeEmitter(emitter) {
   } : emitter;
 }
 
+function callUnsubscribe(unsubscribe, method) {
+
+  if (typeof unsubscribe === 'function') {
+    unsubscribe();
+  }
+
+  if (typeof unsubscribe === 'object' && method && typeof unsubscribe[method] === 'function') {
+    unsubscribe[method]();
+  }
+}
+
 var config = {
   streamConstructor: function(){},
   async: true,
@@ -87,10 +98,10 @@ module.exports = function(options) {
           },
           // When the compute is unbound, unbind from the resolved stream
           off: function () {
-            if (off) {
+            if (unsubscribe) {
+              callUnsubscribe(unsubscribe, off);
+            } else if(off) {
               valueStream[off](streamHandler);
-            } else if(unsubscribe) {
-              unsubscribe();
             }
           }
         });
