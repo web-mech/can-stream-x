@@ -1,5 +1,7 @@
 # can-stream-x
 
+[![Build Status](https://travis-ci.org/web-mech/can-stream-x.svg?branch=master)](https://travis-ci.org/web-mech/can-stream-x)
+
 Stream values into and out of computes using any streaming lib.
 Great for streaming libs that return emitters as a callback.
 
